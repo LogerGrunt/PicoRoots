@@ -138,7 +138,6 @@ function build_root(x,y)
 	if check_adjacent(x,y)==true then
 		if tile_type(x,y)=="water" then
 			mset(x,y,curr_wroot_sprite())
-			vitamin_level+=10
 			water_level+=15
 
 		end
