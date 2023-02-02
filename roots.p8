@@ -12,12 +12,14 @@ function _update()
 	check_build()	
 end
 
+
 function _draw()
 	cls()
 	cam_mov()
 	map()
 	--draw_level()
 	draw_selected()
+	print_stats()
 end
 
 
@@ -61,6 +63,17 @@ end
 
 
 -->8
+--stats code
+
+water_level=100
+vitamin_level=100
+
+
+function print_stats()
+	print("water level:" .. water_level .. "%",0,0)
+	print("vitamins:" .. vitamin_level .. "%",0,8)
+end
+
 
 -->8
 --misc tile code is here
@@ -81,6 +94,7 @@ function tile_type(x,y)
 		if (water_tiles[i]==tile) return "water"
 		if (fertile_tiles[i]==tile) return "vitamin"
 		if (rock_tiles[i]==tile) return "rock"
+		if (root_tiles[i]==tile) return "root"
 	end
 	
 end	
@@ -88,12 +102,21 @@ end
 -->8
 --root code
 
+function check_adjacent(x,y)
+	if mget(x+1,y) or mget(x-1,y) or mget(x,y+1) or mget(y-1)=="root" then
+		return true
+	end
+end
+
 function build_root(x,y)
 	if tile_type(x,y)=="water" then
 	--warning code here
 	end
  	if tile_type(x,y)=="earth" then
-  		mset(x,y,7)
+		if check_adjacent(x,y)==true then
+  			mset(x,y,7)
+			water_level-=5
+		end
  	end	
 end
 
