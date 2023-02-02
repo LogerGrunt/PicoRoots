@@ -4,32 +4,38 @@ __lua__
 --main cycle functions
 
 function _init()
---	set_sky_vars()
+	start_tutorial()
 end
 
 function _update()
-	update_stats()
-	move_selection()
-	switch_root_type()
-	check_build()	
-
+	if in_tutorial==false then
+		update_stats()
+		move_selection()
+		switch_root_type()
+		check_build()	
+	
+	else
+		flip_page()
+	end
 end
 
 
 function _draw()
-	cls()
-	cam_mov()
-	map()
-	--draw_level()
-	draw_selected()
-	print_stats()
-	show_root_sprite()
-	print("selected:" .. tile_type(selectionx,selectiony),3)
-	print("root type:",camx+80,camy+2)
-	
+	if in_tutorial==false then
+		cls()
+		cam_mov()
+		map()
+		--draw_level()
+		draw_selected()
+		print_stats()
+		show_root_sprite()
+		print("selected:" .. tile_type(selectionx,selectiony),3)
+		print("root type:",camx+80,camy+2)
+	end	
 end
 
 
+in_tutorial=false
 -->8
 --draw functions
 
@@ -190,6 +196,64 @@ function check_build()
 	 build_root(selectionx,selectiony)
 	end
 end
+
+
+
+
+-->8
+--tutorial code
+curr_page=0
+
+function start_tutorial()
+	in_tutorial=true
+	cls()
+	page_one()
+end
+
+function flip_page()
+	if btnp(4) then
+		if curr_page==1 then
+			page_two()
+		elseif curr_page==2 then
+			in_tutorial=false
+		end
+	end
+end
+
+function page_one()
+	curr_page=1
+	cls()
+	rectfill(0,0,128,128,4)
+	print("welcome to picoroots!",7)
+	print("in this game, your job is to ",7)
+	print("grow roots in order to reach the ",7)
+	print("special seed at the bottom of",7)
+	print("the level!")
+	print("click z in order to flip to the ",7)
+	print("next page where i will tell you ",7)
+	print("about the controls!")
+end
+
+function page_two()
+	curr_page=2
+	cls()
+	rectfill(0,0,128,128,4)
+	print("the controls are:",7)
+	print("")
+	print("wasd to move your selection",7)
+	print("z in order to build root",7)
+	print("")
+	print("x in order to switch between",7)
+	print("root types",7)
+	print("")
+	print("as you build, you spend water",7)
+	print("and vitamins. you can get more",7)
+	print("of them by building a root in",7)
+	print("water or in places where there",7)
+	print("are vitamins",7)
+
+end
+
 __gfx__
 000000005555555537333333cccccccc111111117777777755555555544444551444441104444400000000000000000000000000000000000000000000000000
 00000000555555557a733733cccccccc111111117000000755555555544444551444441104444400000000000000000000000000000000000000000000000000
