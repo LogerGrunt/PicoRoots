@@ -98,7 +98,7 @@ end
 sky_tiles={3,80,81,96,97}
 earth_tiles={1}
 water_tiles={4}
-fertile_tiles={17}
+vitamin_tiles={17}
 rock_tiles={6}
 grass_tiles={2}
 root_tiles={7,8,23,24}
@@ -114,8 +114,8 @@ function tile_type(x,y)
 	for i=1,#water_tiles do 
 		if (water_tiles[i]==tile) return "water"
 	end
-	for i=1,#fertile_tiles do 
-		if (fertile_tiles[i]==tile) return "vitamin"
+	for i=1,#vitamin_tiles do 
+		if (vitamin_tiles[i]==tile) return "vitamin"
 	end
 	for i=1,#rock_tiles do 
 		if (rock_tiles[i]==tile) return "rock"
