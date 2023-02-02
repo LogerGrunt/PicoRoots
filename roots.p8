@@ -29,8 +29,8 @@ function _draw()
 		draw_selected()
 		print_stats()
 		show_root_sprite()
-		print("selected:" .. tile_type(selectionx,selectiony),3)
-		print("root type:",camx+80,camy+2)
+		print("selected:" .. tile_type(selectionx,selectiony),7)
+		print("root type:",camx+80,camy+2,7)
 	end	
 end
 
@@ -61,16 +61,16 @@ end
 -->8
 --selection code
 
-selectionx=0
-selectiony=0
+selectionx=5
+selectiony=5
 
 function move_selection()
 	if (btnp(⬆️)) selectiony-=1
 	if (btnp(⬇️)) selectiony+=1
 	if (btnp(➡️)) selectionx+=1
 	if (btnp(⬅️)) selectionx-=1
-	selectionx=mid(0,selectionx,15)
-	selectiony=mid(0,selectiony,15)
+	selectionx=mid(0,selectionx,63)
+	selectiony=mid(0,selectiony,63)
 end
 
 
@@ -87,8 +87,8 @@ function update_stats()
 end
 
 function print_stats()
-	print("water level:" .. water_level .. "%",camx,camy)
-	print("vitamins:" .. vitamin_level .. "%",camx,camy+6)
+	print("water level:" .. water_level .. "%",camx,camy,7)
+	print("vitamins:" .. vitamin_level .. "%",camx,camy+6,7)
 end
 
 
@@ -229,6 +229,7 @@ function page_one()
 	print("grow roots in order to reach the ",7)
 	print("special seed at the bottom of",7)
 	print("the level!")
+	print("")
 	print("click z in order to flip to the ",7)
 	print("next page where i will tell you ",7)
 	print("about the controls!")
@@ -241,6 +242,7 @@ function page_two()
 	print("the controls are:",7)
 	print("")
 	print("wasd to move your selection",7)
+	print("")
 	print("z in order to build root",7)
 	print("")
 	print("x in order to switch between",7)
