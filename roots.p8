@@ -21,7 +21,7 @@ function _draw()
 	--draw_level()
 	draw_selected()
 	print_stats()
-	print("selected: " .. tile_type(selectionx,selectiony),3)
+	print("selected:" .. tile_type(selectionx,selectiony),3)
 end
 
 
