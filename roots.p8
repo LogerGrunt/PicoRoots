@@ -65,7 +65,6 @@ function _draw()
 		end	
 	end
 	check_winlose()
-	?mget(selectionx,selectiony)
 end
 
 
