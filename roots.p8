@@ -16,6 +16,7 @@ function _init()
 	sun_spr="cccccccccccccccccccccccccccccccccccccccc9cccccccccc9ccc9a9ccc9cccccccccccccccccccccccc99999cccccccccc9aaa779ccccccc9c9aaaa79c9cccc9ac9aaaaa9ca9cccc9c9aaaaa9c9ccccccc9aaaaa9cccccccccc99999cccccccccccccccccccccccc9ccc9a9ccc9cccccccccc9ccccccccccccccccccccccc"
 	sky_spr="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
 	start_tutorial()
+	music(0)
 end
 
 function _update60()
@@ -252,6 +253,7 @@ function build_root(x,y)
 				mset(x,y,curr_eroot_sprite())
 				vitamin_level+=15
 				water_level-=5
+				sfx(8)
 				sfx(9)
 			end
 		end
@@ -260,12 +262,14 @@ function build_root(x,y)
 				mset(x,y,curr_eroot_sprite())
 				water_level-=10
 				vitamin_level-=5
+				sfx(8)
 			end
 		end
 		if tile_type(x,y)=="seed" then
 			if water_level>=10 and vitamin_level>=5 then
 				mset(x,y,curr_eroot_sprite())
 				win=true
+			end
 		end
 	end
 	if tile_type(x,y)=="sky" then
