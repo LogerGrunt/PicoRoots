@@ -4,24 +4,37 @@ __lua__
 --main cycle functions
 
 function _init()
+	
+	in_tutorial=false
+	warning=false
+	sky_warning=false
+	grass_warning=false
+	fred=false
+
+
 	start_tutorial()
 end
 
 function _update()
 	if in_tutorial==false then
-		update_stats()
-		move_selection()
-		switch_root_type()
-		check_build()	
-	
-	else
-		flip_page()
+		if warning==false then
+			update_stats()
+			move_selection()
+			switch_root_type()
+			check_build() 	
+		end
 	end
+	if warning then
+	check_warning_btnp()
+	end
+	flip_page()
+
 end
 
 
 function _draw()
 	if in_tutorial==false then
+		if warning==false then
 		cls()
 		cam_mov()
 		map()
@@ -31,11 +44,20 @@ function _draw()
 		show_root_sprite()
 		print("selected:" .. tile_type(selectionx,selectiony),7)
 		print("root type:",camx+80,camy+2,7)
+		
+
+
+		end
+		show_warning()
 	end	
 end
 
 
-in_tutorial=false
+function check_warning_btnp()
+	if (btnp(5)) close_warning()
+end
+
+
 -->8
 --draw functions
 
@@ -58,6 +80,53 @@ function cam_mov()
 	camy=mid(0,selectiony-8,48)*8
 	camera(camx,camy)
 end
+
+
+function show_warning(type)
+	if warning==true then
+		if sky_warning then
+			cls()
+			rectfill(0,0,128,128,4)
+			print("yOU CAN'T GROW ROOTS IN AIR.",7)
+			print("wHY? bECAUSE i'M TOO LAZY TO ",7)
+			print("MAKE NORMAL PHYSICS.",7)
+			print("click z to close",7)
+		end
+		if grass_warning then
+			cls()
+			rectfill(0,0,128,128,4)
+			print("sINCE THERE IS NO PHYSICS,",7)
+			print("GRASS IS NOW AS HARD AS A ROCK",7)
+			print("click z to close",7)
+
+		
+		end
+	end
+end
+
+function close_warning()
+	warning=false
+	sky_warning=false
+	grass_warning=false
+end
+
+
+
+
+
+
+
+function tspr(ts,len)
+	if len==8 then
+		for i = 5,#ts do
+			value = tonum(i)
+	end
+	if len==16 then
+	end
+end
+
+
+
 -->8
 --selection code
 
@@ -124,7 +193,9 @@ function tile_type(x,y)
 		if (root_tiles[i]==tile) return "root"
 	end
 	for i=1,#grass_tiles do 
+		
 		if (grass_tiles[i]==tile) return "grass"
+		
 	end
 	return "none"
 end	
@@ -141,6 +212,7 @@ function check_adjacent(x,y)
 end
 
 function build_root(x,y)
+
 	if check_adjacent(x,y)==true then
 		if tile_type(x,y)=="water" then
 			mset(x,y,curr_wroot_sprite())
@@ -156,7 +228,16 @@ function build_root(x,y)
 			water_level-=10
 			vitamin_level-=5
 		end
-	end	
+	end
+	if tile_type(x,y)=="sky" then
+		warning=true
+		sky_warning=true
+	end
+	if tile_type(x,y)=="grass" then
+		warning=true
+		grass_warning=true
+	end
+		
 end
 
 function curr_eroot_sprite()
@@ -255,6 +336,8 @@ function page_two()
 	print("are vitamins",7)
 
 end
+
+
 
 __gfx__
 000000005555555537333333cccccccc111111117777777755555555544444551444441104444400000000000000000000000000000000000000000000000000
