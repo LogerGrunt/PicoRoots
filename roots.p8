@@ -10,7 +10,7 @@ function _init()
 	sky_warning=false
 	grass_warning=false
 	fred=false
-
+	sun_spr="cccccccccccccccccccccccccccccccccccccccc9cccccccccc9ccc9a9ccc9cccccccccccccccccccccccc99999cccccccccc9aaa779ccccccc9c9aaaa79c9cccc9ac9aaaaa9ca9cccc9c9aaaaa9c9ccccccc9aaaaa9cccccccccc99999cccccccccccccccccccccccc9ccc9a9ccc9cccccccccc9ccccccccccccccccccccccc"
 
 	start_tutorial()
 end
@@ -50,6 +50,7 @@ function _draw()
 		end
 		show_warning()
 	end	
+	tspr(sun_spr,32,32,16)
 end
 
 
@@ -116,12 +117,60 @@ end
 
 
 
-function tspr(ts,len)
-	if len==8 then
-		for i = 5,#ts do
-			value = tonum(i)
-	end
+function tspr(ts,x,y,len)
+	px=x
+	py=y
+	ts=tonum(ts,0x1)
+	curr_char=0
 	if len==16 then
+		for i = 1,8 do
+			pset(px,py,ts)
+			px+=1
+		px=0
+		py-=1
+		end
+		for i = 9,16 do
+			pset(px,py,ts)
+			px+=1
+		px=0
+		py-=1
+		end
+		for i = 17,24 do 
+			pset(px,py,ts)
+			px+=1
+		px=0
+		py-=1
+		end
+		for i = 25,32 do
+			pset(px,py,ts)
+			px+=1
+		px=0
+		py-=1
+		end
+		for i = 33,40 do 
+			pset(px,py,ts)
+			px+=1
+		px=0
+		py-=1
+		end
+		for i = 41,48 do 
+			pset(px,py,ts)
+			px+=1
+		px=0
+		py-=1
+		end
+		for i = 49,56 do 
+			pset(px,py,ts)
+			px+=1
+		px=0
+		py-=1
+		end
+		for i = 57,64 do
+			pset(px,py,ts)
+			px+=1
+		end
+	end
+	if len==8 then
 	end
 end
 
