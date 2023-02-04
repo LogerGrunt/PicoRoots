@@ -50,7 +50,7 @@ function _draw()
 		end
 		show_warning()
 	end	
-	tspr(sun_spr,32,32,16)
+	--tspr(sun_spr,32,32)
 end
 
 
@@ -115,65 +115,16 @@ end
 
 
 
-
-
-function tspr(ts,x,y,len)
-	px=x
-	py=y
-	ts=tonum(ts,0x1)
-	curr_char=0
-	if len==16 then
-		for i = 1,8 do
-			pset(px,py,ts)
-			px+=1
-		px=0
-		py-=1
-		end
-		for i = 9,16 do
-			pset(px,py,ts)
-			px+=1
-		px=0
-		py-=1
-		end
-		for i = 17,24 do 
-			pset(px,py,ts)
-			px+=1
-		px=0
-		py-=1
-		end
-		for i = 25,32 do
-			pset(px,py,ts)
-			px+=1
-		px=0
-		py-=1
-		end
-		for i = 33,40 do 
-			pset(px,py,ts)
-			px+=1
-		px=0
-		py-=1
-		end
-		for i = 41,48 do 
-			pset(px,py,ts)
-			px+=1
-		px=0
-		py-=1
-		end
-		for i = 49,56 do 
-			pset(px,py,ts)
-			px+=1
-		px=0
-		py-=1
-		end
-		for i = 57,64 do
-			pset(px,py,ts)
-			px+=1
-		end
-	end
-	if len==8 then
+function tspr(s,x,y)
+	cls()
+	for i=0,#s-1 do
+		p=sub(s,i+1,i+1)
+		c=tonum(p,0x1)
+		nx=i%16
+		ny=i/16
+		pset(x+nx,y+ny,c)
 	end
 end
-
 
 
 -->8
